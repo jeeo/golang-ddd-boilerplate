@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"jeeo/api-boilerplate/internal/application/service"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/application/service"
 
 	"github.com/labstack/echo/v4"
 )

@@ -1,9 +1,9 @@
 package service
 
 import (
-	"jeeo/api-boilerplate/internal/domain/repository"
-	"jeeo/api-boilerplate/internal/entrypoint/dto"
-	"jeeo/api-boilerplate/internal/entrypoint/mapper"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/repository"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/dto"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/mapper"
 )
 
 type PersonService struct {

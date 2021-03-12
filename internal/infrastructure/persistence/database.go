@@ -3,8 +3,9 @@ package persistence
 import (
 	"database/sql"
 	"fmt"
-	"jeeo/api-boilerplate/configs"
 	"log"
+
+	"github.com/Jeeo/golang-ddd-boilerplate/configs"
 
 	_ "github.com/lib/pq"
 )
@@ -21,7 +22,11 @@ func (DB *Database) Init(config configs.Config) {
 		config.Db.Host, config.Db.Port, config.Db.User, config.Db.Pwd, config.Db.Name)
 	DB.Conn, err = sql.Open("postgres", connString)
 	if err != nil {
-		log.Println("Error on connect to Database: ", err.Error())
+		log.Fatalln("Error on create Database driver: ", err.Error())
+	}
+	err = DB.Conn.Ping()
+	if err != nil {
+		log.Fatalln("Error on connect to Database: ", err.Error())
 	}
 }
 

@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"jeeo/api-boilerplate/internal/domain/entity"
-	"jeeo/api-boilerplate/internal/infrastructure/repository"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/entity"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/infrastructure/repository"
 
 	"github.com/google/wire"
 )

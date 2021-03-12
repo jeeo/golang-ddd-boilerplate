@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	"jeeo/api-boilerplate/internal/domain/entity"
-	"jeeo/api-boilerplate/internal/entrypoint/dto"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/entity"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/dto"
 )
 
 type PersonMapper struct{}

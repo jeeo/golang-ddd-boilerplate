@@ -1,4 +1,4 @@
-module jeeo/api-boilerplate
+module github.com/Jeeo/golang-ddd-boilerplate
 
 go 1.15
 

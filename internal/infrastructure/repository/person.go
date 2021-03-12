@@ -1,9 +1,10 @@
 package repository
 
 import (
-	"jeeo/api-boilerplate/internal/domain/entity"
-	"jeeo/api-boilerplate/internal/infrastructure/persistence"
 	"log"
+
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/entity"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/infrastructure/persistence"
 )
 
 // PersonRepository is self explanatory

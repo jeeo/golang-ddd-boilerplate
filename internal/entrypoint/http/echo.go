@@ -1,7 +1,7 @@
 package http
 
 import (
-	"jeeo/api-boilerplate/internal/entrypoint/handler"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/handler"
 
 	"github.com/google/wire"
 	"github.com/labstack/echo/v4"

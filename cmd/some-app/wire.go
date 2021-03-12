@@ -3,13 +3,13 @@
 package main
 
 import (
-	"jeeo/api-boilerplate/configs"
-	"jeeo/api-boilerplate/internal/application/service"
-	"jeeo/api-boilerplate/internal/domain/repository"
-	"jeeo/api-boilerplate/internal/entrypoint/handler"
-	"jeeo/api-boilerplate/internal/entrypoint/http"
-	"jeeo/api-boilerplate/internal/entrypoint/mapper"
-	"jeeo/api-boilerplate/internal/infrastructure/persistence"
+	"github.com/Jeeo/golang-ddd-boilerplate/configs"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/application/service"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/repository"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/handler"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/http"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/mapper"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/infrastructure/persistence"
 
 	"github.com/google/wire"
 )
