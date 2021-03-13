@@ -5,5 +5,5 @@ import (
 )
 
 var ServiceSet = wire.NewSet(
-	ProvidePersonService,
+	PersonServiceSet,
 )

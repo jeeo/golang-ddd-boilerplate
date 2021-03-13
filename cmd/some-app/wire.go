@@ -4,6 +4,7 @@ package main
 
 import (
 	"github.com/Jeeo/golang-ddd-boilerplate/configs"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/application"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/application/service"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/repository"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/handler"
@@ -21,6 +22,7 @@ func initHttpService() http.HttpService {
 		mapper.MapperSet,
 		repository.RepositorySet,
 		service.ServiceSet,
+		application.ApplicationSet,
 		handler.HandlerSet,
 		http.HttpSet,
 	)

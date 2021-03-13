@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Jeeo/golang-ddd-boilerplate/internal/application/service"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/application"
 
 	"github.com/labstack/echo/v4"
 )
 
 type PersonHandler struct {
-	service *service.PersonService
+	application *application.PersonApplication
 }
 
 // func (ph *PersonHandler) Create(payload dto.PersonDTO) dto.PersonDTO {
@@ -26,7 +26,7 @@ func (ph *PersonHandler) GetById(ctx echo.Context) error {
 		log.Println("error on parse HTTP param: ", err.Error())
 		return err
 	}
-	response := ph.service.GetById(int32(personId))
+	response := ph.application.FindOne(int32(personId))
 
 	ctx.JSON(http.StatusOK, response)
 	return nil
@@ -50,8 +50,8 @@ func (ph *PersonHandler) GetById(ctx echo.Context) error {
 // 	return success
 // }
 
-func ProvidePersonHandler(s *service.PersonService) *PersonHandler {
+func ProvidePersonHandler(a *application.PersonApplication) *PersonHandler {
 	return &PersonHandler{
-		service: s,
+		application: a,
 	}
 }
