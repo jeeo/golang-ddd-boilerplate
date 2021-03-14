@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/application"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/dto"
 
 	"github.com/labstack/echo/v4"
 )
@@ -14,16 +15,23 @@ type PersonHandlerImpl struct {
 	application application.PersonApplication
 }
 
-// func (ph *PersonHandler) Create(payload dto.PersonDTO) dto.PersonDTO {
-// 	person := ph.repository.Create(ph.mapper.FromDTO(payload))
-
-// 	return ph.mapper.ToDTO(person)
-// }
+func (ph *PersonHandlerImpl) Create(ctx echo.Context) error {
+	personDTO := new(dto.PersonDTO)
+	if err := ctx.Bind(personDTO); err != nil {
+		log.Println("error on parse body: ", err.Error())
+		ctx.Response().Status = 500
+		return err
+	}
+	response := ph.application.CreatePerson(*personDTO)
+	ctx.JSON(http.StatusOK, response)
+	return nil
+}
 
 func (ph *PersonHandlerImpl) GetById(ctx echo.Context) error {
 	personId, err := strconv.ParseInt(ctx.Param("id"), 10, 32)
 	if err != nil {
 		log.Println("error on parse HTTP param: ", err.Error())
+		ctx.Response().Status = 500
 		return err
 	}
 	response := ph.application.FindOne(int32(personId))
@@ -32,23 +40,42 @@ func (ph *PersonHandlerImpl) GetById(ctx echo.Context) error {
 	return nil
 }
 
-// func (ph *PersonHandler) GetAll() []dto.PersonDTO {
-// 	people := ph.repository.GetAll()
+func (ph *PersonHandlerImpl) GetAll(ctx echo.Context) error {
+	response := ph.application.FindAll()
 
-// 	return ph.mapper.ToManyDTO(people)
-// }
+	ctx.JSON(http.StatusOK, response)
+	return nil
+}
 
-// func (ph *PersonHandler) Update(payload dto.PersonDTO) dto.PersonDTO {
-// 	person := ph.repository.Update(ph.mapper.FromDTO(payload))
+func (ph *PersonHandlerImpl) Update(ctx echo.Context) error {
+	personId, err := strconv.ParseInt(ctx.Param("id"), 10, 32)
+	if err != nil {
+		log.Println("error on parse HTTP param: ", err.Error())
+		ctx.Response().Status = 500
+		return err
+	}
+	personDTO := new(dto.PersonDTO)
+	if err = ctx.Bind(personDTO); err != nil {
+		log.Println("error on parse body: ", err.Error())
+		ctx.Response().Status = 500
+		return err
+	}
+	response := ph.application.UpdatePerson(int32(personId), *personDTO)
+	ctx.JSON(http.StatusOK, response)
+	return nil
+}
 
-// 	return ph.mapper.ToDTO(person)
-// }
+func (ph *PersonHandlerImpl) Delete(ctx echo.Context) error {
+	personId, err := strconv.ParseInt(ctx.Param("id"), 10, 32)
+	if err != nil {
+		log.Println("error on parse HTTP param: ", err.Error())
+		return err
+	}
 
-// func (ph *PersonHandler) Delete(id int32) bool {
-// 	success := ph.repository.Delete(id)
-
-// 	return success
-// }
+	response := ph.application.DeletePerson(int32(personId))
+	ctx.JSON(http.StatusOK, response)
+	return nil
+}
 
 func ProvidePersonHandler(a application.PersonApplication) *PersonHandlerImpl {
 	return &PersonHandlerImpl{

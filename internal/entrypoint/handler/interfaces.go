@@ -7,6 +7,10 @@ import (
 
 type PersonHandler interface {
 	GetById(echo.Context) error
+	GetAll(echo.Context) error
+	Create(echo.Context) error
+	Update(echo.Context) error
+	Delete(echo.Context) error
 }
 
 var PersonHandlerSet = wire.NewSet(

@@ -27,6 +27,11 @@ func (s *EchoServer) Init() {
 	e.Use(middleware.CORS())
 
 	e.GET("/person/:id", s.handler.GetById)
+	e.GET("/person", s.handler.GetAll)
+	e.POST("/person", s.handler.Create)
+	e.PUT("/person/:id", s.handler.Update)
+	e.DELETE("/person/:id", s.handler.Delete)
+
 	e.Start(fmt.Sprintf(":%s", port))
 }
 
