@@ -5,5 +5,5 @@ import (
 )
 
 var ApplicationSet = wire.NewSet(
-	ProvidePersonApplication,
+	PersonApplicationSet,
 )

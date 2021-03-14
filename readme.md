@@ -14,4 +14,4 @@ Its a simple boilerplate for DDD aplications
 ## Todo
 - [x] Define project layers
 - [ ] Unit tests example
-- [ ] Adds deployment artifacts
+- [x] Adds deployment artifacts

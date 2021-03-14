@@ -10,8 +10,8 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type PersonHandler struct {
-	application *application.PersonApplication
+type PersonHandlerImpl struct {
+	application application.PersonApplication
 }
 
 // func (ph *PersonHandler) Create(payload dto.PersonDTO) dto.PersonDTO {
@@ -20,7 +20,7 @@ type PersonHandler struct {
 // 	return ph.mapper.ToDTO(person)
 // }
 
-func (ph *PersonHandler) GetById(ctx echo.Context) error {
+func (ph *PersonHandlerImpl) GetById(ctx echo.Context) error {
 	personId, err := strconv.ParseInt(ctx.Param("id"), 10, 32)
 	if err != nil {
 		log.Println("error on parse HTTP param: ", err.Error())
@@ -50,8 +50,8 @@ func (ph *PersonHandler) GetById(ctx echo.Context) error {
 // 	return success
 // }
 
-func ProvidePersonHandler(a *application.PersonApplication) *PersonHandler {
-	return &PersonHandler{
+func ProvidePersonHandler(a application.PersonApplication) *PersonHandlerImpl {
+	return &PersonHandlerImpl{
 		application: a,
 	}
 }
