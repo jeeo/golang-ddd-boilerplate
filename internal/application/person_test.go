@@ -12,17 +12,17 @@ import (
 
 func TestFindOne(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	serviceMock := mock.NewMockPersonService(ctrl)
+	repoMock := mock.NewMockPersonRepository(ctrl)
 	mapperMock := mock.NewMockPersonMapper(ctrl)
 	someId := int32(10)
 	expected := dto.PersonDTO{ID: 10, Name: "Some person", Age: 20}
 	target := &PersonApplicationImpl{
-		service: serviceMock,
-		mapper:  mapperMock,
+		repository: repoMock,
+		mapper:     mapperMock,
 	}
-	serviceMock.
+	repoMock.
 		EXPECT().
-		GetById(someId).
+		GetOne(someId).
 		Return(entity.Person{ID: 10, Name: "Some person", Age: 20}).
 		Times(1)
 	mapperMock.
@@ -40,17 +40,17 @@ func TestFindOne(t *testing.T) {
 
 func TestFindAll(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	serviceMock := mock.NewMockPersonService(ctrl)
+	repoMock := mock.NewMockPersonRepository(ctrl)
 	mapperMock := mock.NewMockPersonMapper(ctrl)
 	expected := []dto.PersonDTO{
 		{ID: 10, Name: "Some person", Age: 20},
 		{ID: 11, Name: "Another person", Age: 38},
 	}
 	target := &PersonApplicationImpl{
-		service: serviceMock,
-		mapper:  mapperMock,
+		repository: repoMock,
+		mapper:     mapperMock,
 	}
-	serviceMock.
+	repoMock.
 		EXPECT().
 		GetAll().
 		Return([]entity.Person{
@@ -76,20 +76,20 @@ func TestFindAll(t *testing.T) {
 
 func TestCreatePerson(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	serviceMock := mock.NewMockPersonService(ctrl)
+	repoMock := mock.NewMockPersonRepository(ctrl)
 	mapperMock := mock.NewMockPersonMapper(ctrl)
 	payload := dto.PersonDTO{Name: "Created person", Age: 20}
 	expected := dto.PersonDTO{ID: 1, Name: "Created person", Age: 20}
 	target := &PersonApplicationImpl{
-		service: serviceMock,
-		mapper:  mapperMock,
+		repository: repoMock,
+		mapper:     mapperMock,
 	}
 	mapperMock.
 		EXPECT().
 		FromDTO(dto.PersonDTO{Name: "Created person", Age: 20}).
 		Return(entity.Person{ID: 0, Name: "Created person", Age: 20}).
 		Times(1)
-	serviceMock.
+	repoMock.
 		EXPECT().
 		Create(entity.Person{ID: 0, Name: "Created person", Age: 20}).
 		Return(entity.Person{ID: 1, Name: "Created person", Age: 20}).
@@ -109,21 +109,21 @@ func TestCreatePerson(t *testing.T) {
 
 func TestUpdatePerson(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	serviceMock := mock.NewMockPersonService(ctrl)
+	repoMock := mock.NewMockPersonRepository(ctrl)
 	mapperMock := mock.NewMockPersonMapper(ctrl)
 	personId := int32(10)
 	payload := dto.PersonDTO{ID: 1, Name: "UPDATED person", Age: 21}
 	expected := dto.PersonDTO{ID: 1, Name: "UPDATED person", Age: 21}
 	target := &PersonApplicationImpl{
-		service: serviceMock,
-		mapper:  mapperMock,
+		repository: repoMock,
+		mapper:     mapperMock,
 	}
 	mapperMock.
 		EXPECT().
 		FromDTO(payload).
 		Return(entity.Person{ID: 1, Name: "UPDATED person", Age: 21}).
 		Times(1)
-	serviceMock.
+	repoMock.
 		EXPECT().
 		Update(personId, entity.Person{ID: 1, Name: "UPDATED person", Age: 21}).
 		Return(entity.Person{ID: 1, Name: "UPDATED person", Age: 21}).
@@ -143,15 +143,15 @@ func TestUpdatePerson(t *testing.T) {
 
 func TestDeletePerson(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	serviceMock := mock.NewMockPersonService(ctrl)
+	repoMock := mock.NewMockPersonRepository(ctrl)
 	mapperMock := mock.NewMockPersonMapper(ctrl)
 	someId := int32(10)
 	expected := true
 	target := &PersonApplicationImpl{
-		service: serviceMock,
-		mapper:  mapperMock,
+		repository: repoMock,
+		mapper:     mapperMock,
 	}
-	serviceMock.
+	repoMock.
 		EXPECT().
 		Delete(someId).
 		Return(true).
@@ -166,14 +166,14 @@ func TestDeletePerson(t *testing.T) {
 
 func TestProvidePersonApplication(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	serviceMock := mock.NewMockPersonService(ctrl)
+	repoMock := mock.NewMockPersonRepository(ctrl)
 	mapperMock := mock.NewMockPersonMapper(ctrl)
 	expected := &PersonApplicationImpl{
-		service: serviceMock,
-		mapper:  mapperMock,
+		repository: repoMock,
+		mapper:     mapperMock,
 	}
 
-	result := ProvidePersonApplication(serviceMock, mapperMock)
+	result := ProvidePersonApplication(repoMock, mapperMock)
 
 	if !reflect.DeepEqual(result, expected) {
 		t.Errorf("\nRECEIVED %#v\nEXPECTED: %#v", result, expected)

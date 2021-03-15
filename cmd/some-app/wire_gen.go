@@ -8,7 +8,6 @@ package main
 import (
 	"github.com/Jeeo/golang-ddd-boilerplate/configs"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/application"
-	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/service"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/handler"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/http"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/mapper"
@@ -22,9 +21,8 @@ func initHttpService() http.HttpService {
 	config := configs.ProvideConfig()
 	database := persistence.ProvideDatabase(config)
 	personRepositoryImpl := repository.ProvidePersonRepository(database)
-	personServiceImpl := service.ProvidePersonService(personRepositoryImpl)
 	personMapperImpl := mapper.ProvidePersonMapper()
-	personApplicationImpl := application.ProvidePersonApplication(personServiceImpl, personMapperImpl)
+	personApplicationImpl := application.ProvidePersonApplication(personRepositoryImpl, personMapperImpl)
 	personHandlerImpl := handler.ProvidePersonHandler(personApplicationImpl)
 	echoServer := http.ProvideEchoServer(personHandlerImpl, config)
 	return echoServer
