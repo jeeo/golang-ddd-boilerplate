@@ -22,7 +22,7 @@ func TestFindOne(t *testing.T) {
 	}
 	repoMock.
 		EXPECT().
-		GetOne(someId).
+		GetPerson(someId).
 		Return(entity.Person{ID: 10, Name: "Some person", Age: 20}).
 		Times(1)
 	mapperMock.
@@ -52,7 +52,7 @@ func TestFindAll(t *testing.T) {
 	}
 	repoMock.
 		EXPECT().
-		GetAll().
+		GetPeople().
 		Return([]entity.Person{
 			{ID: 10, Name: "Some person", Age: 20},
 			{ID: 11, Name: "Another person", Age: 38},
@@ -91,7 +91,7 @@ func TestCreatePerson(t *testing.T) {
 		Times(1)
 	repoMock.
 		EXPECT().
-		Create(entity.Person{ID: 0, Name: "Created person", Age: 20}).
+		CreatePerson(entity.Person{ID: 0, Name: "Created person", Age: 20}).
 		Return(entity.Person{ID: 1, Name: "Created person", Age: 20}).
 		Times(1)
 	mapperMock.
@@ -125,7 +125,7 @@ func TestUpdatePerson(t *testing.T) {
 		Times(1)
 	repoMock.
 		EXPECT().
-		Update(personId, entity.Person{ID: 1, Name: "UPDATED person", Age: 21}).
+		UpdatePerson(personId, entity.Person{ID: 1, Name: "UPDATED person", Age: 21}).
 		Return(entity.Person{ID: 1, Name: "UPDATED person", Age: 21}).
 		Times(1)
 	mapperMock.
@@ -153,7 +153,7 @@ func TestDeletePerson(t *testing.T) {
 	}
 	repoMock.
 		EXPECT().
-		Delete(someId).
+		DeletePerson(someId).
 		Return(true).
 		Times(1)
 
