@@ -6,9 +6,9 @@ import (
 
 // PersonRepository is a interface for person repository
 type PersonRepository interface {
-	Create(entity.Person) entity.Person
-	GetOne(int32) entity.Person
-	GetAll() []entity.Person
-	Update(int32, entity.Person) entity.Person
-	Delete(int32) bool
+	CreatePerson(entity.Person) entity.Person
+	GetPerson(int32) entity.Person
+	GetPeople() []entity.Person
+	UpdatePerson(int32, entity.Person) entity.Person
+	DeletePerson(int32) bool
 }

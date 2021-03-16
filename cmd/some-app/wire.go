@@ -5,7 +5,7 @@ package main
 import (
 	"github.com/Jeeo/golang-ddd-boilerplate/configs"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/application"
-	"github.com/Jeeo/golang-ddd-boilerplate/internal/application/repository"
+	"github.com/Jeeo/golang-ddd-boilerplate/internal/domain/repository"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/handler"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/http"
 	"github.com/Jeeo/golang-ddd-boilerplate/internal/entrypoint/mapper"

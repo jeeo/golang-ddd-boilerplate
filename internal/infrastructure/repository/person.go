@@ -13,7 +13,7 @@ type PersonRepositoryImpl struct {
 }
 
 // GetOne returns a persisted Person
-func (pr *PersonRepositoryImpl) GetOne(id int32) entity.Person {
+func (pr *PersonRepositoryImpl) GetPerson(id int32) entity.Person {
 	person := entity.Person{}
 	statement := "SELECT id, name, age from person where id = $1"
 	preparedStatement, err := pr.Database.Conn.Prepare(statement)
@@ -31,7 +31,7 @@ func (pr *PersonRepositoryImpl) GetOne(id int32) entity.Person {
 }
 
 // GetAll returns all persisted Person
-func (pr *PersonRepositoryImpl) GetAll() []entity.Person {
+func (pr *PersonRepositoryImpl) GetPeople() []entity.Person {
 	people := []entity.Person{}
 	statement := "SELECT id, name, age from person"
 	rows, err := pr.Database.Conn.Query(statement)
@@ -51,7 +51,7 @@ func (pr *PersonRepositoryImpl) GetAll() []entity.Person {
 }
 
 // Create inserts a person into Database
-func (pr *PersonRepositoryImpl) Create(person entity.Person) entity.Person {
+func (pr *PersonRepositoryImpl) CreatePerson(person entity.Person) entity.Person {
 	p := entity.Person{}
 	statement := "INSERT INTO person (name, age) VALUES ($1, $2) returning id, name, age"
 	preparedStatement, err := pr.Database.Conn.Prepare(statement)
@@ -64,7 +64,7 @@ func (pr *PersonRepositoryImpl) Create(person entity.Person) entity.Person {
 }
 
 // Update updates an person
-func (pr *PersonRepositoryImpl) Update(id int32, person entity.Person) entity.Person {
+func (pr *PersonRepositoryImpl) UpdatePerson(id int32, person entity.Person) entity.Person {
 	p := entity.Person{}
 	statement := "UPDATE person SET name = $1, age = $2 where id = $3 returning id, name, age"
 	preparedStatement, err := pr.Database.Conn.Prepare(statement)
@@ -77,7 +77,7 @@ func (pr *PersonRepositoryImpl) Update(id int32, person entity.Person) entity.Pe
 }
 
 // Delete deeltes a persisted Person
-func (pr *PersonRepositoryImpl) Delete(id int32) bool {
+func (pr *PersonRepositoryImpl) DeletePerson(id int32) bool {
 	statement := "DELETE FROM person WHERE id = $1"
 	preparedStatement, err := pr.Database.Conn.Prepare(statement)
 
